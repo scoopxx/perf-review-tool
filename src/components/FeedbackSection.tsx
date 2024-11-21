@@ -47,7 +47,7 @@ export default function FeedbackSection({
   return (
     <div className="space-y-4 p-4 border border-gray-200 rounded-lg">
       <div className="flex justify-between items-start gap-4">
-        <div className="flex-1">
+        <div className="flex-1 space-y-6">
           <label className="block text-sm font-medium text-gray-700">
             Question {questionNumber}
           </label>
@@ -59,22 +59,30 @@ export default function FeedbackSection({
             placeholder="Enter your question..."
           />
 
-          <div className="mt-2">
-            <label className="block text-sm font-medium text-gray-700">
-              Tone
+        <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Feedback Tone
             </label>
-            <div className="flex space-x-2 mt-1">
-              {Object.values(TONE_DICT).map((value) => (
-                <button
-                  key={value}
-                  onClick={() => onToneChange(value)}
-                  className={`px-3 py-1 rounded-md ${
-                    tone === value ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
-                  }`}
-                >
-                  {value}
-                </button>
-              ))}
+            <div className="relative inline-flex items-center">
+              <div className={`
+                w-3 h-3 rounded-full mr-2
+                ${tone === 'Extremely Negative' ? 'bg-red-500' : 
+                  tone === 'Negative' ? 'bg-orange-500' : 
+                  tone === 'Neutral' ? 'bg-gray-500' : 
+                  tone === 'Positive' ? 'bg-green-500' : 
+                  'bg-emerald-500'} 
+              `} />
+              <select
+                value={tone}
+                onChange={(e) => onToneChange(e.target.value)}
+                className="form-select border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              >
+                {Object.values(TONE_DICT).map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>
@@ -93,7 +101,7 @@ export default function FeedbackSection({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-medium font-medium text-gray-700 font-bold">
               Initial Feedback
             </label>
             <span className={`text-sm ${isOverLimit ? 'text-red-600' : 'text-gray-500'}`}>
@@ -123,7 +131,7 @@ export default function FeedbackSection({
         
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-medium font-medium text-gray-700 font-bold">
               Refined Feedback
             </label>
             <button
