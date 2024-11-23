@@ -40,7 +40,7 @@ The application will be available at `http://localhost:5173`
 ### Production Build
 ```bash
 npm run build
-npm start
+npm run preview
 ```
 
 ### Example Screenshot
