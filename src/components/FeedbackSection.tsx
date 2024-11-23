@@ -115,7 +115,7 @@ export default function FeedbackSection({
             value={initialFeedback}
             onChange={(e) => onFeedbackChange(e.target.value)}
             rows={4}
-            className={`w-full rounded-md shadow-sm focus:ring-blue-500 ${
+            className={`w-full rounded-md shadow-sm focus:ring-blue-500 min-h-[108px] max-h-[300px] ${
               isOverLimit 
                 ? 'border-red-300 focus:border-red-500' 
                 : 'border-gray-300 focus:border-blue-500'
@@ -134,6 +134,12 @@ export default function FeedbackSection({
             <label className="block text-medium font-medium text-gray-700 font-bold">
               Refined Feedback
             </label>
+            <div className="flex items-center gap-2">
+              {refinedFeedback && (
+                <span className="text-sm text-gray-500">
+                  {refinedFeedback.trim().split(/\s+/).filter(Boolean).length}/{WORD_LIMIT} words
+                </span>
+              )}
             <button
               onClick={onRegenerate}
               disabled={isLoading || !initialFeedback || isOverLimit}
@@ -143,7 +149,8 @@ export default function FeedbackSection({
               Regenerate
             </button>
           </div>
-          <div className="bg-gray-50 rounded-md p-3 h-[108px] overflow-y-auto">
+          </div>
+          <div className="bg-gray-50 rounded-md p-3 min-h-[108px] max-h-[500px] overflow-y-auto">
             {isLoading ? (
               <div className="flex items-center justify-center h-full text-gray-500">
                 <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
